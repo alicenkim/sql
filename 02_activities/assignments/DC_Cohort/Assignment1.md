@@ -209,5 +209,15 @@ Consider, for example, concepts of fariness, inequality, social structures, marg
 
 
 ```
-Your thoughts...
+## Ethics: Values in Everyday Databases
+
+Databases may look like neutral tools, but they often reflect the values and ideas of the people who create them. As Qadri (2021) explains, databases can also shape how society understands family and relationships.
+
+I can see this in everyday systems such as school registration platforms and banking services. For example, school systems often ask for information about parents and home addresses. However, not all families have the same structure. Children with separated parents or shared custody arrangements may not fit easily into these systems.
+
+School catchment areas are another example. A child's home address can decide which school they can attend. This may create unfair situations because some families cannot afford to live in neighbourhoods with certain schools.
+
+Banking systems can also create challenges. People who are new to Canada or have little credit history may find it harder to get loans or other financial services.
+
+These examples show that databases do more than store information. The way they collect and organize data can affect people's opportunities and everyday lives. I think database designers should consider different family situations and social backgrounds. A fair system should be flexible and should not assume that everyone has the same life experiences.
 ```
