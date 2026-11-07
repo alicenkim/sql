@@ -241,6 +241,7 @@ WHERE product_qty_type = 'unit';
 /*2. Using `INSERT`, add a new row to the product_units table (with an updated timestamp). 
 This can be any product you desire (e.g. add another record for Apple Pie). */
 --QUERY 10
+--QUERY 10
 INSERT INTO product_units (
     product_id,
     product_name,
@@ -255,13 +256,9 @@ SELECT
     product_size,
     product_category_id,
     product_qty_type,
-    datetime(
-        (SELECT MAX(snapshot_timestamp) FROM product_units),
-        '+1 minute'
-    )
-FROM product
-WHERE product_id = 7
-  AND product_qty_type = 'unit'
+    datetime(snapshot_timestamp, '+1 minute')
+FROM product_units
+WHERE product_name = 'Apple Pie'
 LIMIT 1;
 --END QUERY
 
