@@ -267,7 +267,11 @@ HINT: If you don't specify a WHERE clause, you are going to have a bad time.*/
 --QUERY 11
 DELETE FROM product_units
 WHERE product_name = 'Apple Pie'
-AND snapshot_timestamp < '2026-11-07 21:56:10';
+AND snapshot_timestamp < (
+      SELECT MAX(snapshot_timestamp)
+      FROM product_units
+      WHERE product_name = 'Apple Pie'
+  );
 --END QUERY
 
 
