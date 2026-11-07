@@ -247,8 +247,7 @@ INSERT INTO product_units (
     product_size,
     product_category_id,
     product_qty_type,
-    snapshot_timestamp,
-	product_qty
+    snapshot_timestamp
 )
 VALUES (
     7,
@@ -256,11 +255,7 @@ VALUES (
     '10"',
     3,
     'unit',
-    datetime(
-		(SELECT MAX(snapshot_timestamp) FROM product_units),
-		'+1 minute'
-	),
-	10
+   CURRENT_TIMESTAMP
 );
 --END QUERY
 
@@ -271,11 +266,8 @@ VALUES (
 HINT: If you don't specify a WHERE clause, you are going to have a bad time.*/
 --QUERY 11
 DELETE FROM product_units
-WHERE snapshot_timestamp < (
-    SELECT MAX(pu2.snapshot_timestamp)
-    FROM product_units pu2
-    WHERE pu2.product_id = product_units.product_id
-);
+WHERE product_name = 'Apple Pie'
+AND snapshot_timestamp < '2026-11-07 21:56:10';
 --END QUERY
 
 
@@ -297,16 +289,16 @@ Finally, make sure you have a WHERE statement to update the right row,
 When you have all of these components, you can run the update statement. */
 --QUERY 12
 ALTER TABLE product_units
-ADD COLUMN current_quantity DECIMAL(16,2);
+ADD current_quantity INT;
 
 UPDATE product_units
 SET current_quantity = COALESCE(
     (
-        SELECT quantity
-        FROM vendor_inventory
-        WHERE vendor_inventory.product_id = product_units.product_id
-        ORDER BY market_date DESC, vendor_id DESC
-        LIMIT 1
+        SELECT vi.quantity
+        FROM vendor_inventory vi
+        WHERE vi.product_id = product_units.product_id
+        ORDER BY vi.market_date DESC
+		LIMIT 1
     ),
     0
 );
