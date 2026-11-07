@@ -184,18 +184,36 @@ Think a bit about the row counts: how many distinct vendors, product names are t
 How many customers are there (y). 
 Before your final group by you should have the product of those two queries (x*y).  */
 --QUERY 8
+WITH latest_inventory AS (
+    SELECT
+        vendor_id,
+        product_id,
+        original_price,
+        ROW_NUMBER() OVER (
+            PARTITION BY vendor_id, product_id
+            ORDER BY market_date DESC
+        ) AS rn
+    FROM vendor_inventory
+)
 SELECT
     v.vendor_name,
     p.product_name,
-    SUM(5 * cp.cost_per_quantity) * COUNT(DISTINCT c.customer_id) AS total_revenue
-FROM (
-    SELECT DISTINCT vendor_id, product_id, cost_per_quantity
-    FROM customer_purchases
-) cp
-JOIN vendor v ON cp.vendor_id = v.vendor_id
-JOIN product p ON cp.product_id = p.product_id
+    5 * COUNT(DISTINCT c.customer_id) * li.original_price
+        AS total_revenue
+FROM latest_inventory li
+JOIN vendor v
+    ON li.vendor_id = v.vendor_id
+JOIN product p
+    ON li.product_id = p.product_id
 CROSS JOIN customer c
-GROUP BY v.vendor_name, p.product_name;
+WHERE li.rn = 1
+GROUP BY
+    v.vendor_name,
+    p.product_name,
+    li.original_price
+ORDER BY
+    v.vendor_name,
+    p.product_name;
 --END QUERY
 
 
@@ -205,13 +223,14 @@ This table will contain only products where the `product_qty_type = 'unit'`.
 It should use all of the columns from the product table, as well as a new column for the `CURRENT_TIMESTAMP`.  
 Name the timestamp column `snapshot_timestamp`. */
 --QUERY 9
-INSERT INTO product_units (
-    product_id, product_name, product_size,
-    product_category_id, product_qty_type, snapshot_timestamp
-)
+CREATE TABLE product_units AS
 SELECT
-    product_id, product_name, product_size,
-    product_category_id, product_qty_type, CURRENT_TIMESTAMP
+    product_id,
+    product_name,
+    product_size,
+    product_category_id,
+    product_qty_type,
+    CURRENT_TIMESTAMP AS snapshot_timestamp
 FROM product
 WHERE product_qty_type = 'unit';
 --END QUERY
