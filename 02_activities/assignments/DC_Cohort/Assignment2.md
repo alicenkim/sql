@@ -57,7 +57,13 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Architecture 1: SCD Type 1 (Overwrite)
+
+In this approach, the existing customer address is overwritten whenever the customer moves. The CUSTOMER_ADDRESS table stores only the most recent address. Previous addresses are not retained, so this approach does not preserve historical address changes.
+
+Architecture 2: SCD Type 2 (Retain Changes)
+
+In this approach, a new record is added whenever a customer's address changes, while the previous address record is retained. The table can include fields such as start_date, end_date, and is_current to track when each address was valid and identify the current address. This approach preserves the customer's address history over time.
 ```
 
 ***
