@@ -83,6 +83,7 @@ customer_purchases table that indicates how many different times that customer h
 You can make this a running count by including an ORDER BY within the PARTITION BY if desired.
 Filter the visits to dates before April 29, 2022. */
 --QUERY 4
+--QUERY 4
 SELECT
     customer_id,
     product_id,
@@ -91,6 +92,7 @@ SELECT
         PARTITION BY customer_id, product_id
     ) AS purchase_count
 FROM customer_purchases
+WHERE market_date < '2022-04-29'
 ORDER BY customer_id, product_id, market_date;
 --END QUERY
 
@@ -107,14 +109,14 @@ Remove any trailing or leading whitespaces. Don't just use a case statement for 
 
 Hint: you might need to use INSTR(product_name,'-') to find the hyphens. INSTR will help split the column. */
 --QUERY 5
-Habanero Peppers - Organic	Organic
-Jalapeno Peppers - Organic	Organic
-Poblano Peppers - Organic	Organic
-Banana Peppers - Jar	Jar
-Baby Salad Lettuce Mix - Bag	Bag
-Red Potatoes - Small	Small
-Carrots - Organic	Organic
-Maple Syrup - Jar	Jar
+SELECT
+    product_name,
+    CASE
+        WHEN INSTR(product_name, '-') > 0
+        THEN TRIM(SUBSTR(product_name, INSTR(product_name, '-') + 1))
+        ELSE NULL
+    END AS description
+FROM product;
 --END QUERY
 
 
@@ -254,9 +256,9 @@ SELECT
     product_category_id,
     product_qty_type,
     datetime('now', '+1 minute')
-FROM product_units
+FROM product
 WHERE product_name = 'Apple Pie'
-LIMIT 1;
+  AND product_qty_type = 'unit';
 --END QUERY
 
 
