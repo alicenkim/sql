@@ -255,9 +255,12 @@ SELECT
     product_size,
     product_category_id,
     product_qty_type,
-    datetime('now', '+1 minute')
+    datetime(
+        (SELECT MAX(snapshot_timestamp) FROM product_units),
+        '+1 minute'
+    )
 FROM product
-WHERE product_name = 'Apple Pie'
+WHERE product_id = 7
   AND product_qty_type = 'unit'
 LIMIT 1;
 --END QUERY
