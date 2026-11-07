@@ -249,16 +249,17 @@ INSERT INTO product_units (
     product_qty_type,
     snapshot_timestamp
 )
-SELECT
-    product_id,
-    product_name,
-    product_size,
-    product_category_id,
-    product_qty_type,
-    datetime(snapshot_timestamp, '+1 minute')
-FROM product_units
-WHERE product_name = 'Apple Pie'
-LIMIT 1;
+VALUES (
+    7,
+    'Apple Pie',
+    '10"',
+    3,
+    'unit',
+    datetime(
+		SELECT MAX (snapshot_timestamp) FROM product_units),
+		'+1 minute')
+	)
+);
 --END QUERY
 
 
