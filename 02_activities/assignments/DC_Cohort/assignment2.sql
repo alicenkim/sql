@@ -240,14 +240,23 @@ WHERE product_qty_type = 'unit';
 This can be any product you desire (e.g. add another record for Apple Pie). */
 --QUERY 10
 INSERT INTO product_units (
-    product_id, product_name, product_size,
-    product_category_id, product_qty_type, snapshot_timestamp
+    product_id,
+    product_name,
+    product_size,
+    product_category_id,
+    product_qty_type,
+    snapshot_timestamp
 )
 SELECT
-    product_id, product_name, product_size,
-    product_category_id, product_qty_type, CURRENT_TIMESTAMP
-FROM product
-WHERE product_name = 'Pumpkin Pie';
+    product_id,
+    product_name,
+    product_size,
+    product_category_id,
+    product_qty_type,
+    datetime('now', '+1 minute')
+FROM product_units
+WHERE product_name = 'Apple Pie'
+LIMIT 1;
 --END QUERY
 
 
