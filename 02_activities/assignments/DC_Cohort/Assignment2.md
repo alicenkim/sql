@@ -199,5 +199,13 @@ Consider, for example, concepts of labour, bias, LLM proliferation, moderating c
 
 
 ```
-Your thoughts...
+### Section 4: Ethics
+
+Boykis (2019) argues that artificial intelligence is not truly automated but depends heavily on human labour. For example, ImageNet relied on workers who manually labelled millions of images, often for very low wages. Although their work made major AI developments possible, these workers received little recognition. This raises ethical questions about labour exploitation and the unequal distribution of benefits in the technology industry.
+
+The article also highlights how human biases become embedded in AI systems. Image classification depends on human decisions about categories and labels, which can reproduce stereotypes and discrimination. This challenges the assumption that AI is objective or neutral. Instead, AI systems reflect the cultural assumptions and social values of the people who create their training data.
+
+Another important concern is accountability and content moderation. When AI produces harmful or offensive content, responsibility should not be placed solely on the algorithm. Researchers and technology companies must consider how their datasets and design decisions contribute to these outcomes. As large language models become increasingly widespread, these questions become even more urgent.
+
+Ultimately, Boykis reminds us that AI is deeply connected to society. Its development reflects human labour, cultural assumptions, and existing power inequalities. Recognizing the people behind AI is essential to understanding its ethical implications. Rather than viewing AI as an independent and neutral technology, we should approach it as a sociotechnical system that requires transparency, accountability, and greater recognition of the people whose work makes it possible.
 ```
