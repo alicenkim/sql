@@ -247,7 +247,8 @@ INSERT INTO product_units (
     product_size,
     product_category_id,
     product_qty_type,
-    snapshot_timestamp
+    snapshot_timestamp,
+	product_qty
 )
 VALUES (
     7,
@@ -256,9 +257,10 @@ VALUES (
     3,
     'unit',
     datetime(
-		(SELECT MAX (snapshot_timestamp) FROM product_units),
+		(SELECT MAX(snapshot_timestamp) FROM product_units),
 		'+1 minute'
-	)
+	),
+	10
 );
 --END QUERY
 
