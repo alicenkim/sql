@@ -82,7 +82,7 @@ customer_purchases table that indicates how many different times that customer h
 
 You can make this a running count by including an ORDER BY within the PARTITION BY if desired.
 Filter the visits to dates before April 29, 2022. */
---QUERY 4
+
 --QUERY 4
 SELECT
     customer_id,
@@ -259,6 +259,7 @@ SELECT
 FROM product
 WHERE product_name = 'Apple Pie'
   AND product_qty_type = 'unit';
+LIMIT 1;
 --END QUERY
 
 
