@@ -256,8 +256,8 @@ VALUES (
     3,
     'unit',
     datetime(
-		SELECT MAX (snapshot_timestamp) FROM product_units),
-		'+1 minute')
+		(SELECT MAX (snapshot_timestamp) FROM product_units),
+		'+1 minute'
 	)
 );
 --END QUERY
