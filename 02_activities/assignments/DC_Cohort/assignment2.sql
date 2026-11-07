@@ -241,7 +241,6 @@ WHERE product_qty_type = 'unit';
 /*2. Using `INSERT`, add a new row to the product_units table (with an updated timestamp). 
 This can be any product you desire (e.g. add another record for Apple Pie). */
 --QUERY 10
---QUERY 10
 INSERT INTO product_units (
     product_id,
     product_name,
