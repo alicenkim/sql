@@ -258,7 +258,7 @@ SELECT
     datetime('now', '+1 minute')
 FROM product
 WHERE product_name = 'Apple Pie'
-  AND product_qty_type = 'unit';
+  AND product_qty_type = 'unit'
 LIMIT 1;
 --END QUERY
 
