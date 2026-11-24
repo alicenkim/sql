@@ -57,7 +57,13 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Architecture 1: SCD Type 1 (Overwrite)
+
+In this approach, the existing customer address is overwritten whenever the customer moves. The CUSTOMER_ADDRESS table stores only the most recent address. Previous addresses are not retained, so this approach does not preserve historical address changes.
+
+Architecture 2: SCD Type 2 (Retain Changes)
+
+In this approach, a new record is added whenever a customer's address changes, while the previous address record is retained. The table can include fields such as start_date, end_date, and is_current to track when each address was valid and identify the current address. This approach preserves the customer's address history over time.
 ```
 
 ***
@@ -193,5 +199,13 @@ Consider, for example, concepts of labour, bias, LLM proliferation, moderating c
 
 
 ```
-Your thoughts...
+### Section 4: Ethics
+
+Boykis (2019) argues that artificial intelligence is not truly automated but depends heavily on human labour. For example, ImageNet relied on workers who manually labelled millions of images, often for very low wages. Although their work made major AI developments possible, these workers received little recognition. This raises ethical questions about labour exploitation and the unequal distribution of benefits in the technology industry.
+
+The article also highlights how human biases become embedded in AI systems. Image classification depends on human decisions about categories and labels, which can reproduce stereotypes and discrimination. This challenges the assumption that AI is objective or neutral. Instead, AI systems reflect the cultural assumptions and social values of the people who create their training data.
+
+Another important concern is accountability and content moderation. When AI produces harmful or offensive content, responsibility should not be placed solely on the algorithm. Researchers and technology companies must consider how their datasets and design decisions contribute to these outcomes. As large language models become increasingly widespread, these questions become even more urgent.
+
+Ultimately, Boykis reminds us that AI is deeply connected to society. Its development reflects human labour, cultural assumptions, and existing power inequalities. Recognizing the people behind AI is essential to understanding its ethical implications. Rather than viewing AI as an independent and neutral technology, we should approach it as a sociotechnical system that requires transparency, accountability, and greater recognition of the people whose work makes it possible.
 ```
